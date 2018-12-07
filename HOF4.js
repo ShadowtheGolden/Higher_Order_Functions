@@ -180,7 +180,7 @@ function each(coll, f) {
   }
 }
 
-function reduce(array, f, acc) {
+/* function reduce(array, f, acc) {
   if (acc === undefined) {
     acc = array[0];
     array = array.slice(1);
@@ -189,7 +189,7 @@ function reduce(array, f, acc) {
     acc = f(acc, element, i);
   });
   return acc;
-}
+} */
 
 /* function range(start, end) {
   var acc = [];
@@ -240,20 +240,20 @@ function range(start, end) {
 function reduce(coll, f, acc) {
   if (Array.isArray(coll)){
     if (acc === undefined) {
-      acc = array[0];
-      array = array.slice(1);
+      acc = coll[0];
+      coll = coll.slice(1);
     }
-    each(array, function(element, i) {
+    each(coll, function(element, i) {
       acc = f(acc, element, i);
     });
     return acc;
   }
+  var keys = Object.keys(coll);
   if (acc === undefined) {
-    acc = Object.keys(coll)[0];
-    delete coll[acc];
+    acc = coll[keys.shift()];
   }
-  for (var key in coll){
-    acc = f(coll[key], key);
-  }
+  each(keys, function(key) {
+    acc = f(acc, coll[key])
+  });
   return acc;
 }
