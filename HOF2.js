@@ -53,7 +53,6 @@ function keys(obj) {
   return arr;
 }
 
-
 function keysLongerThan(obj, number) {
   var newObj = {};
   each(obj, (value, key) => key.length > number ? newObj[key] = value : null);
@@ -106,11 +105,41 @@ function filter(coll, predicate) {
   }
 }
 
-function evens(numbers) {
+/* function evens(numbers) {
   return filter(numbers, number => number % 2 === 0);
 }
 
-console.log(evens([1,2,3,4,5,6]));
+function multiplesOfThree(numbers) {
+  return filter(numbers, number => number % 3 === 0);
+}
+
+function positives(numbers) {
+  return filter(numbers, number => number > 0);
+}
+
+function evenLength(strings) {
+  return filter(strings, string => string.length % 2 === 0);
+}
+
+function odds(numbers) {
+  return filter(numbers, number => number % 2 === 1);
+}
+
+function negatives(numbers) {
+  return filter(numbers, number => number < 0);
+}
+
+function largerThanSix(numbers) {
+  return filter(numbers, number => number > 6);
+}
+
+function startsWithChar(strings, character) {
+  return filter(strings, string => string[0] === character);
+}
+
+var words = "the quick brown fox jumps over the lazy dog".split(" ");
+console.log(startsWithChar(words, "q")); // => ["quick"]
+console.log(startsWithChar(words, "t")); // => ["the", "the"] */
 
 function evenIndexedEvenLengths(strings) {
   return filter(strings, (string, ind) => (ind % 2 === 0 && string.length % 2 ===0));
@@ -120,7 +149,7 @@ console.log(evenIndexedEvenLengths(["lion", "monkey", "aardvaark", "cat", "doge"
 console.log(evenIndexedEvenLengths(["red", "green", "purple", "blue", "yellow"])); // => ["purple", "yellow"]
 
 function onlyNumeric(obj) {
-  return filter(obj, (value, key) => typeof value === 'number');
+  return filter(obj, value => typeof value === 'number');
 }
 
 console.log(onlyNumeric({a: 1, b: "dog", c: true})); // => {a: 1}
