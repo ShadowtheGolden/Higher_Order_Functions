@@ -1,4 +1,4 @@
-function each(coll, f) {
+/* function each(coll, f) {
   if (Array.isArray(coll)) {
     for (var i = 0; i < coll.length; i++) {
       f(coll[i], i);
@@ -16,7 +16,7 @@ function map(array, f) {
     acc.push(f(element, i));
   });
   return acc;
-}
+} */
 
 /* var people = [
   {name: {first: "Alyssa", middle: "P.", last: "Hacker"}, age: 26},
@@ -137,3 +137,51 @@ function parseCSV(string) {
 
   });
 }
+
+function each(coll, f) {
+  if (Array.isArray(coll)) {
+    for (var i = 0; i < coll.length; i++) {
+      f(coll[i], i);
+    }
+  } else {
+    for (var key in coll) {
+      f(coll[key], key);
+    }
+  }
+}
+
+function map(coll, f) {
+  var acc = [];
+  if (!Array.isArray(coll)) {
+    acc = {};
+  }
+  each(coll, function(element, key) {
+    acc[key] = f(element, key);
+  });
+  return acc;
+}
+
+/* function incrementValues(obj) {
+  var newObj = {};
+  each(obj, (value, key) => typeof value === 'number' ? newObj[key] = value + 1 : newObj[key] = value);
+  return newObj;
+} */
+
+function incrementValues(obj) {
+  return map(obj, value => typeof value === 'number' ? value + 1 : value);
+}
+
+//console.log(incrementValues({name: "Annyeong", age: 25, favoriteColor: "blue", year: 1986}));
+
+function uppercaseValues(obj) {
+  return map(obj, value => typeof value === 'string' ? value.toUpperCase() : value);
+}
+
+//console.log(uppercaseValues({name: "Annyeong", age: 25, favoriteColor: "blue", year: 1986}));
+
+function countNestedKeys(object) {
+  return map(object, value => Object.keys(value).length);
+}
+
+console.log(countNestedKeys({a: {b: 1, c: 7}, f: {h: 22, g: 12, i: 24}}));
+// => {a: 2, f: 3}
